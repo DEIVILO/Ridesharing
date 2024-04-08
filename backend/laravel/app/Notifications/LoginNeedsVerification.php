@@ -31,19 +31,17 @@ class LoginNeedsVerification extends Notification
         return [TwilioChannel::class];
     }
 
-
     public function toTwilio($notifiable)
     {
         $loginCode = rand(111111, 999999);
 
-        $notifiable-> update([
-            'login_code'=> $loginCode
+        $notifiable->update([
+            'login_code' => $loginCode
         ]);
 
-        return(new TwilioSmsMessage())
-        ->content("Your Ryde comfirmation code is {$loginCode}, don't share this with anyone!");
+        return (new TwilioSmsMessage())
+            ->content("Your Ryde login code is {$loginCode}, don't share this with anyone!");
     }
-
 
     /**
      * Get the array representation of the notification.
